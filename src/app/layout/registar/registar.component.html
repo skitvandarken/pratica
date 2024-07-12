@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+
+<div  class="uk-text-center uk-margin-large-top">
+    <h1>Registe-se</h1>
+</div>
+
+<div style="justify-content: center; margin-top: 4%;" class="uk-text-center">
+    
+    <form id="userForm">
+
+        <div class="uk-margin">
+            <input id="nome" class="uk-input uk-form-width-large" type="text" placeholder="Nome Completo" aria-label="Large">
+        </div>
+    
+        <div class="uk-margin">
+            <input id="senha" class="uk-input uk-form-width-medium" type="text" placeholder="Senha" aria-label="Medium">
+        </div>
+
+        <button type="submit" onclick="criarusuario" class="uk-button-danger uk-button-large">Registar-se</button>
+    
+      
+    </form>
+</div>
+
+
+<script>
+    function criarusuario() {
+    
+        const userForm = document.getElementById('userForm');
+      userForm.addEventListener('submit', event => {
+        event.preventDefault();
+        criarusuario();
+      });
+    
+        const nome = document.getElementById('nome').value;
+        const senha = document.getElementById('senha').value;
+      
+        fetch('/api/user', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome, senha})
+        })
+        .then(() => {
+          showUsers();
+          userForm.reset();
+        })
+        .catch(error => console.error('Erro:', error));
+      }
+     
+      
+      showUsers();
+    </script>
+
+
+
+<app-footer></app-footer>

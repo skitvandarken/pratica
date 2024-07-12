@@ -1,0 +1,56 @@
+
+<div style="margin-top: 4%;" class="uk-text-center">
+    <h1 class="uk-text-center">Seja Bem-Vindo</h1>
+    <p>Introduza seus dados para entrar</p>
+</div>
+
+<div class="centralizado uk-text-center">
+<form id="userForm">
+    <div class="uk-margin">
+        <div class="uk-inline">
+            <span class="uk-form-icon" uk-icon="icon: user"></span>
+            <input id="nome" class="uk-input" type="text" aria-label="Not clickable icon">
+        </div>
+    </div>
+
+    <div class="uk-margin">
+        <div class="uk-inline">
+            <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: lock"></span>
+            <input ide="senha" class="uk-input" type="text" aria-label="Not clickable icon">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <button type="submit" onclick="criarusuario()" class="uk-button-danger uk-button-large">Entrar</button>
+    </div>
+    <p>Não tem uma conta?  <a routerLink="/registar">Clique aqui para criar uma conta</a></p>
+</form>
+
+</div>
+
+<script>
+function criarusuario() {
+
+    const userForm = document.getElementById('userForm');
+  userForm.addEventListener('submit', event => {
+    event.preventDefault();
+    criarusuario();
+  });
+
+    const nome = document.getElementById('nome').value;
+    const senha = document.getElementById('senha').value;
+  
+    fetch('/api/user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, senha})
+    })
+    .then(() => {
+      showUsers();
+      userForm.reset();
+    })
+    .catch(error => console.error('Erro:', error));
+  }
+ 
+  
+  showUsers();
+</script>
