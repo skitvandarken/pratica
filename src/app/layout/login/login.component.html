@@ -20,37 +20,10 @@
         </div>
     </div>
     <div class="uk-margin">
-        <button type="submit" onclick="criarusuario()" class="uk-button-danger uk-button-large">Entrar</button>
+        <button type="submit" onclick="" class="uk-button-danger uk-button-large">Entrar</button>
     </div>
     <p>Não tem uma conta?  <a routerLink="/registar">Clique aqui para criar uma conta</a></p>
 </form>
 
 </div>
 
-<script>
-function criarusuario() {
-
-    const userForm = document.getElementById('userForm');
-  userForm.addEventListener('submit', event => {
-    event.preventDefault();
-    criarusuario();
-  });
-
-    const nome = document.getElementById('nome').value;
-    const senha = document.getElementById('senha').value;
-  
-    fetch('/api/user', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, senha})
-    })
-    .then(() => {
-      showUsers();
-      userForm.reset();
-    })
-    .catch(error => console.error('Erro:', error));
-  }
- 
-  
-  showUsers();
-</script>
